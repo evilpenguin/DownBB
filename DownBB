@@ -1,0 +1,47 @@
+#!/bin/bash
+clear
+echo "Welcome to EvilPenguins| downgrade of BaseBand 2.30 to 2.28."
+echo 
+echo "You need to make sure you have BootLoader 5.8 for this to work correctly."
+echo "This will not work with BootLoader 5.9!!!"
+echo "If you do not have BootLoader 5.8, you could hurt your iPhone 3G"
+echo
+echo "To find out your BL #, you must download minicom from cydia"
+echo
+echo "minicom -s: config the Ports to /tty.debug"
+echo
+echo "execute:"
+echo "___________"
+echo "minicom -w"
+echo "at+xkeydata"
+echo "___________"
+sleep 7
+echo 
+echo "Would you like to continue? (yes | no)"
+read -p ANSWER: 
+if [ "$REPLY" == 'yes' ];then
+	echo "enter your password when it is requested."
+	cd /Applications/DownBB/
+	clear
+	chmod 755 BBUpdaterExtreme
+	su -c "launchctl unload /System/Library/LaunchDaemons/com.apple.CommCenter.plist; ./BBUpdaterExtreme update -f ICE2_02.28.00.fls -e ICE2_02.28.00.eep"
+	echo "Time for reboot.. Please Wait.."
+	sleep 3
+	su -c reboot
+else
+	clear
+	echo "If you stopped this becasue you don't know if you have BL 5.8"
+	echo "Just download minicom from cydia and config port to /tty.debug"
+	echo
+	echo "and execute"
+	echo "_____________"
+	echo "|minicom -x |"
+	echo "|at+xkendata|"
+	echo "|___________|"
+	sleep 12
+	echo "Later!!! -EP"
+	clear
+	exit
+fi
+
+# end script
